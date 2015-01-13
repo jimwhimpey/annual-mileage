@@ -9,13 +9,19 @@
 		https = require('https'),
 		querystring = require('querystring'),
 		moment = require('moment'),
-		cookieParser = require('cookie-parser');
+		cookieParser = require('cookie-parser'),
+		numeral = require('numeral');
 
 
 // ===============================================
 // Setup handlebars and SASS
 // ===============================================
 
+	handlebars.registerHelper('formatNumber', function(meters, format, units) {
+		var factor = (units === 'km') ? 1000 : 1;
+		return numeral(meters / factor).format(format) + units;
+	});
+	
 	app.engine('hbs', handlebars.express3({
 		partialsDir: __dirname + '/views/partials',
 		layoutsDir: __dirname + '/views/layouts',
@@ -56,18 +62,48 @@
 				}
 			}, function(activityResponse) {
 				
-				var data = "";
+				var data = "",
+				    ytdDistance = 0,
+				    ytdElevation = 0,
+				    ytdDistancePerDay = 0,
+				    ytdElevationPerDay = 0,
+				    dayOfYear = moment().dayOfYear(),
+				    monthOfYear = moment().month() + 1,
+				    daysInYear = (moment().isLeapYear()) ? 366 : 365,
+				    daysLeftInYear = daysInYear - dayOfYear;
 
-				activityResponse.on('data', function (chunk) {
-					data += chunk;
-				});
+				activityResponse.on('data', function (chunk) { data += chunk; });
 				
 				activityResponse.on('end', function () {
-					console.log("=============================");
-					console.log(JSON.parse(data));
-					pageResponse.render('mileage', {
-						name: "harry"
+					
+					// Loop through all the activities
+					JSON.parse(data).forEach(function(activity) {
+						
+						// Only if this activity is a ride
+						if (activity.type === "Ride") {
+							ytdDistance = ytdDistance + activity.distance;
+							ytdElevation = ytdElevation + activity.total_elevation_gain;
+						}
+						
 					});
+					
+					// Calculate YTD
+					ytdDistancePerDay = ytdDistance / dayOfYear;
+					ytdElevationPerDay = ytdElevation / dayOfYear;
+
+					// Put it all out on the page
+					pageResponse.render('mileage', {
+						ytdDistance: ytdDistance,
+						ytdElevation: ytdElevation,
+						ytdDistancePerDay: ytdDistancePerDay,
+						ytdElevationPerDay: ytdElevationPerDay,
+						ytdDistancePerWeek: ytdDistancePerDay * 7,
+						ytdElevationPerWeek: ytdElevationPerDay * 7,
+						daysLeftInYear: daysLeftInYear,
+						projectedAnnualDistance: ytdDistancePerDay * daysLeftInYear,
+						projectedAnnualElevation: ytdElevationPerDay * daysLeftInYear
+					});
+					
 				});
 
 			});

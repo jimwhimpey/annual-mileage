@@ -23,6 +23,7 @@
     "http-post": "x",
     "querystring": "x",
     "moment": "x",
-    "cookie-parser": "x"
+    "cookie-parser": "x",
+    "numeral": "x"
   }
 }
