@@ -1,5 +1,15 @@
 {{>header}}
-
+	
+	<ul class="unit-switcher">
+		{{#if isMetric}}
+			<li><a class="selected">metric</a></li>
+			<li><a href="/">imperial</a></li>
+		{{else}}
+			<li><a href="/">metric</a></li>
+			<li><a class="selected">imperial</a></li>
+		{{/if}}
+	</ul>
+	
 	{{>mileage-data}}
 	
 	{{>mileage-projector}}

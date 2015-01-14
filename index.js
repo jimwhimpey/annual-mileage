@@ -83,7 +83,8 @@
 				    dayOfYear = moment().dayOfYear(),
 				    monthOfYear = moment().month() + 1,
 				    daysInYear = (moment().isLeapYear()) ? 366 : 365,
-				    daysLeftInYear = daysInYear - dayOfYear;
+				    daysLeftInYear = daysInYear - dayOfYear,
+				    rideData;
 
 				activityResponse.on('data', function (chunk) { data += chunk; });
 				
@@ -104,8 +105,7 @@
 					ytdDistancePerDay = ytdDistance / dayOfYear;
 					ytdElevationPerDay = ytdElevation / dayOfYear;
 
-					// Put it all out on the page
-					pageResponse.render('mileage-page', {
+					rideData = {
 						ytdDistance: ytdDistance,
 						ytdElevation: ytdElevation,
 						ytdDistancePerDay: ytdDistancePerDay,
@@ -116,6 +116,12 @@
 						projectedAnnualDistance: ytdDistancePerDay * daysLeftInYear,
 						projectedAnnualElevation: ytdElevationPerDay * daysLeftInYear,
 						isMetric: true
+					};
+
+					// Put it all out on the page
+					pageResponse.render('mileage-page', {
+						rideData: rideData,
+						rideDataForTemplate: JSON.stringify(rideData)
 					});
 					
 				});
@@ -164,6 +170,9 @@
 		tokenRequest.end();
 
 	});
+	
+	// Static view serving
+	app.use(express.static(__dirname + '/views'));
 
 
 // ===============================================
