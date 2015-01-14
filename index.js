@@ -105,7 +105,7 @@
 					ytdElevationPerDay = ytdElevation / dayOfYear;
 
 					// Put it all out on the page
-					pageResponse.render('mileage', {
+					pageResponse.render('mileage-page', {
 						ytdDistance: ytdDistance,
 						ytdElevation: ytdElevation,
 						ytdDistancePerDay: ytdDistancePerDay,
@@ -124,7 +124,7 @@
 			
 		} else {
 			// No cookie, homepage with a connect to Strava link
-			pageResponse.render('home', {});
+			pageResponse.render('home-page', {});
 		}
 		
 	});
