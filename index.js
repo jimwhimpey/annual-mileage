@@ -17,9 +17,22 @@
 // Setup handlebars and SASS
 // ===============================================
 
-	handlebars.registerHelper('formatNumber', function(meters, format, units) {
-		var factor = (units === 'km') ? 1000 : 1;
-		return numeral(meters / factor).format(format) + units;
+	handlebars.registerHelper('formatNumber', function(meters, format, scale, isMetric) {
+		
+		var factor, distance;
+		
+		// Switch based on scale and system
+		if (scale === 'big') {
+			units = (isMetric) ? 'km' : 'mi';
+			distance = (isMetric) ? meters/1000 : ((meters/1000) * 0.6214);
+		} else {
+			units = (isMetric) ? 'm' : 'ft';
+			distance = (isMetric) ? meters : (meters * 3.28084);
+		}
+		
+		// Format it
+		return numeral(distance).format(format) + units;
+		
 	});
 	
 	app.engine('hbs', handlebars.express3({
@@ -101,7 +114,8 @@
 						ytdElevationPerWeek: ytdElevationPerDay * 7,
 						daysLeftInYear: daysLeftInYear,
 						projectedAnnualDistance: ytdDistancePerDay * daysLeftInYear,
-						projectedAnnualElevation: ytdElevationPerDay * daysLeftInYear
+						projectedAnnualElevation: ytdElevationPerDay * daysLeftInYear,
+						isMetric: true
 					});
 					
 				});
