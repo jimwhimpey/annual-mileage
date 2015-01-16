@@ -12,12 +12,12 @@
 		<meta content='width=device-width' name='viewport'>
 
 		<script charset='utf-8' src='/scripts/numeral.min.js' type='text/javascript'></script>
-		<script charset='utf-8' src="/scripts/react.min.js" type='text/javascript'></script>
+		<script charset='utf-8' src="/scripts/react.js" type='text/javascript'></script>
 		
 		<script charset='utf-8' src='/scripts/helpers.js' type='text/javascript'></script>
 		
 		<script src="/build/mileageData.js"></script>
-		<script src="/build/pageContent.js"></script>
+		<script src="/build/mileageContent.js"></script>
 		<script src="/build/unitSwitcher.js"></script>
 		
 		<script type='text/javascript'>
@@ -27,13 +27,7 @@
 			
 			// When everything's good to go
 			document.addEventListener('DOMContentLoaded', function() {
-				
-				// Boot up React
-				React.render(
-					React.createElement(PageContent, {rideData: rideData}),
-					document.getElementById('content')
-				);
-				
+				// Ready
 			}, false);
 			
 		</script>

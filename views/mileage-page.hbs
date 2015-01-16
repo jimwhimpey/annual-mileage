@@ -1,5 +1,15 @@
 {{>header}}
-		
+
 <div id="content"></div>
+
+<script type='text/javascript'>
+		
+	// Boot up React
+	React.render(
+		React.createElement(MileageContent, {rideData: rideData}),
+		document.getElementById('content')
+	);
+	
+</script>
 
 {{>footer}}

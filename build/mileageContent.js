@@ -1,4 +1,4 @@
-var PageContent = React.createClass({displayName: "PageContent",
+var MileageContent = React.createClass({displayName: "MileageContent",
 	render: function() {
 		return (
 			React.createElement("div", null, 

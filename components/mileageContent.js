@@ -1,4 +1,4 @@
-var PageContent = React.createClass({
+var MileageContent = React.createClass({
 	render: function() {
 		return (
 			<div>
