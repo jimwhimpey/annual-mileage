@@ -24,6 +24,7 @@
     "querystring": "x",
     "moment": "x",
     "cookie-parser": "x",
-    "numeral": "x"
+    "numeral": "x",
+    "react-tools": "x"
   }
 }

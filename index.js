@@ -171,8 +171,8 @@
 
 	});
 	
-	// Static view serving
-	app.use(express.static(__dirname + '/views'));
+	// Static build directory serving
+	app.use('/build', express.static(__dirname + '/build'));
 
 
 // ===============================================
