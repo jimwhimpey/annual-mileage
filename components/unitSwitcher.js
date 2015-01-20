@@ -1,19 +1,18 @@
 var UnitSwitcher = React.createClass({
 	
-	handleClick: function(e) {
-		
-		e.preventDefault();
-		
-		console.log("e", e);
-		
-		return;
+	componentDidMount: function() {
+		this.setState({isMetric: isMetric});
+	},
+	
+	handleChange: function(e) {
+		this.props.handleChange(e);
 	},
 	
 	render: function() {
 		return (
 			<ul class="unit-switcher">
-				<li><a href="#" onClick={this.handleClick}>metric</a></li>
-				<li><a href="#" onClick={this.handleClick}>imperial</a></li>
+				<li><a onClick={this.handleChange.bind(null, true)}>metric</a></li>
+				<li><a onClick={this.handleChange.bind(null, false)}>imperial</a></li>
 			</ul>
 		);
 	}

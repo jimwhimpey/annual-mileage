@@ -1,19 +1,18 @@
 var UnitSwitcher = React.createClass({displayName: "UnitSwitcher",
 	
-	handleClick: function(e) {
-		
-		e.preventDefault();
-		
-		console.log("e", e);
-		
-		return;
+	componentDidMount: function() {
+		this.setState({isMetric: isMetric});
+	},
+	
+	handleChange: function(e) {
+		this.props.handleChange(e);
 	},
 	
 	render: function() {
 		return (
 			React.createElement("ul", {class: "unit-switcher"}, 
-				React.createElement("li", null, React.createElement("a", {href: "#", onClick: this.handleClick}, "metric")), 
-				React.createElement("li", null, React.createElement("a", {href: "#", onClick: this.handleClick}, "imperial"))
+				React.createElement("li", null, React.createElement("a", {onClick: this.handleChange.bind(null, true)}, "metric")), 
+				React.createElement("li", null, React.createElement("a", {onClick: this.handleChange.bind(null, false)}, "imperial"))
 			)
 		);
 	}

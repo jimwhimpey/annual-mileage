@@ -114,14 +114,14 @@
 						ytdElevationPerWeek: ytdElevationPerDay * 7,
 						daysLeftInYear: daysLeftInYear,
 						projectedAnnualDistance: ytdDistancePerDay * daysLeftInYear,
-						projectedAnnualElevation: ytdElevationPerDay * daysLeftInYear,
-						isMetric: true
+						projectedAnnualElevation: ytdElevationPerDay * daysLeftInYear
 					};
 
 					// Put it all out on the page
 					pageResponse.render('mileage-page', {
 						rideData: rideData,
-						rideDataForTemplate: JSON.stringify(rideData)
+						rideDataForTemplate: JSON.stringify(rideData),
+						isMetric: true
 					});
 					
 				});
