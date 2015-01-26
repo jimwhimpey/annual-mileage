@@ -6,7 +6,10 @@
 		
 	// Boot up React
 	React.render(
-		React.createElement(MileageContent, {rideData: rideData}),
+		React.createElement(MileageContent, {
+			rideData: rideData,
+			isMetric: true
+		}),
 		document.getElementById('content')
 	);
 	

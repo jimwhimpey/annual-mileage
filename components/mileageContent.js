@@ -1,14 +1,10 @@
 var MileageContent = React.createClass({
 	
-	componentDidMount: function() {
-		this.setState({
-			rideData: rideData,
-			isMetric: isMetric
-		});
+	getInitialState: function() {
+		return this.props;
 	},
 	
 	handleChange: function(e) {
-		console.log("unitSwitcher setState", e);
 		this.setState({isMetric: e});
 		return;
 	},
@@ -16,8 +12,8 @@ var MileageContent = React.createClass({
 	render: function() {
 		return (
 			<div>
-				<UnitSwitcher isMetric={this.props.isMetric} handleChange={this.handleChange} />
-				<MileageData rideData={this.props.rideData} isMetric={this.props.isMetric} />
+				<UnitSwitcher isMetric={this.state.isMetric} handleChange={this.handleChange} />
+				<MileageData rideData={this.state.rideData} isMetric={this.state.isMetric} />
 			</div>
 		);
 	}
