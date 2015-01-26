@@ -13,42 +13,6 @@ function formatNumber(meters, format, scale, isMetric) {
 	}
 	
 	// Format it
-	return numeral(distance).format(format) + units;
+	return (distance <= 0) ? "0" + units : numeral(distance).format(format) + units;
 	
 };
-
-
-	
-
-	
-	// // Work out the projections
-	// $('.annualGoalDistance').bind('input propertychange', function() {
-	//
-	// 	// And convert to meters
-	// 	var annualGoalDistance = $('.annualGoalDistance').val() * 1000;
-	//
-	// 	// Come on, it's got to be a number
-	// 	if (isNaN(annualGoalDistance)) {
-	// 		alert("Must be a number");
-	// 		$('.annualGoalDistance').val('');
-	// 	}
-	//
-	// 	// Work things out
-	// 	var distanceLeftToHitTarget = annualGoalDistance - rideData.ytdDistance,
-	// 	    requiredDistancePerDay = (annualGoalDistance > rideData.ytdDistance) ? (distanceLeftToHitTarget / rideData.daysLeftInYear) / 1000 : 0,
-	// 	    requiredDistancePerWeek = (annualGoalDistance > rideData.ytdDistance) ? (requiredDistancePerDay * 7) : 0,
-	// 	    distancePerDayDifference = (requiredDistancePerDay > 0) ? (requiredDistancePerDay / 1000 - rideData.ytdDistancePerDay) : 0,
-	// 	    distancePerWeekDifference = (requiredDistancePerWeek > 0) ? (requiredDistancePerWeek / 1 - rideData.ytdDistancePerWeek) / 1000 : 0;
-	//
-	// 	// Put them in the page
-	// 	$(".requiredDistancePerDay").text(requiredDistancePerDay);
-	// 	$(".requiredDistancePerWeek").text(requiredDistancePerWeek);
-	// 	$(".distancePerDayDifference").text(distancePerDayDifference);
-	// 	$(".distancePerWeekDifference").text(distancePerWeekDifference);
-	//
-	// });
-	//
-	// // now this will fetch <path/to/templates/content.hbs>
-	// // $('#some-element').render('content', {
-	// //     // ...
-	// // });

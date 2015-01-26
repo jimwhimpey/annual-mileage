@@ -13,7 +13,8 @@ var MileageContent = React.createClass({displayName: "MileageContent",
 		return (
 			React.createElement("div", null, 
 				React.createElement(UnitSwitcher, {isMetric: this.state.isMetric, handleChange: this.handleChange}), 
-				React.createElement(MileageData, {rideData: this.state.rideData, isMetric: this.state.isMetric})
+				React.createElement(MileageData, {rideData: this.state.rideData, isMetric: this.state.isMetric}), 
+				React.createElement(MileageProjector, {rideData: this.state.rideData, isMetric: this.state.isMetric})
 			)
 		);
 	}
