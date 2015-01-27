@@ -12,8 +12,14 @@ var MileageProjector = React.createClass({
 		};
 	},
 	
+	componentDidMount: function() {
+		this.refs.annualGoalDistance.getDOMNode().value = (typeof localStorage.getItem("goalDistance") !== "undefined") ? localStorage.getItem("goalDistance") : "";
+		this.refs.annualGoalElevation.getDOMNode().value = (typeof localStorage.getItem("goalElevation") !== "undefined") ? localStorage.getItem("goalElevation") : "";
+		this.handleDistanceGoal({ target: this.refs.annualGoalDistance.getDOMNode() });
+		this.handleElevationGoal({ target: this.refs.annualGoalElevation.getDOMNode() });
+	},
+	
 	handleDistanceGoal: function(e) {
-		
 		var goalInMeters = (this.props.isMetric) ? e.target.value * 1000 : e.target.value * 1.609344 * 1000,
 		    requiredDistancePerDay = (goalInMeters - this.props.rideData.ytdDistance) / this.props.rideData.daysLeftInYear;
 		
@@ -21,6 +27,9 @@ var MileageProjector = React.createClass({
 			requiredDistancePerDay: requiredDistancePerDay,
 			distancePerDayDifference: requiredDistancePerDay - this.props.rideData.ytdDistancePerDay
 		});
+		
+		// Remember it
+		localStorage.setItem("goalDistance", e.target.value);
 		
 	},
 	
@@ -33,6 +42,9 @@ var MileageProjector = React.createClass({
 			requiredElevationPerDay: requiredElevationPerDay,
 			elevationPerDayDifference: requiredElevationPerDay - this.props.rideData.ytdElevationPerDay
 		});
+		
+		// Remember it
+		localStorage.setItem("goalElevation", e.target.value);
 		
 	},
 	
