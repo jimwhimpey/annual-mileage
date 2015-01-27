@@ -170,6 +170,12 @@
 
 	});
 	
+	// Just deletes the cookie
+	app.use('/logout', function(req, res) {
+		res.clearCookie('annualMileageToken');
+		res.redirect('/');
+	});
+	
 	// Static build directory serving
 	app.use('/build', express.static(__dirname + '/build'));
 
