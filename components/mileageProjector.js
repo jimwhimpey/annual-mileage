@@ -4,15 +4,30 @@ var MileageProjector = React.createClass({
 	
 	getInitialState: function() {
 		return {
-			requiredPerDay: 0
+			requiredPerDay: 0,
+			goalDistance: 0
 		};
 	},
 	
 	handleDistanceGoal: function(e) {
 		
+		// Set target value to the right amount of meters
+		// var valueEntered = (this.props.isMetric) ?
+		
 		this.setState({
 			requiredPerDay: (e.target.value * 1000 - this.props.rideData.ytdDistance) / this.props.rideData.daysLeftInYear
 		});
+		
+	},
+	
+	componentDidUpdate: function(prevProps, prevState) {
+		
+		// Update the input fields as the units change
+		if (this.props.isMetric && !prevProps.isMetric) {
+			this.refs.annualGoalDistance.getDOMNode().value = Math.floor(this.refs.annualGoalDistance.getDOMNode().value * 1.609344);
+		} else if (!this.props.isMetric && prevProps.isMetric) {
+			this.refs.annualGoalDistance.getDOMNode().value = Math.floor(this.refs.annualGoalDistance.getDOMNode().value * 0.6213711922);
+		}
 		
 	},
 	
@@ -25,7 +40,7 @@ var MileageProjector = React.createClass({
 			
 			<div className="mileageProjector">
 			
-				<p>Annual goal distance: <input type="text" onChange={this.handleDistanceGoal} class="annualGoalDistance" />{bigUnits}</p>
+				<p>Annual goal distance: <input type="text" onChange={this.handleDistanceGoal} class="annualGoalDistance" ref="annualGoalDistance" />{bigUnits}</p>
 
 				<ul>
 					<li>Required distance per day: <span class="requiredDistancePerDay">{formatNumber(this.state.requiredPerDay, '0,0.00', 'big', this.props.isMetric)}</span></li>
