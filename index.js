@@ -120,8 +120,7 @@
 					// Put it all out on the page
 					pageResponse.render('mileage-page', {
 						rideData: rideData,
-						rideDataForTemplate: JSON.stringify(rideData),
-						isMetric: true
+						rideDataForTemplate: JSON.stringify(rideData)
 					});
 					
 				});

@@ -7,7 +7,8 @@ var MileageProjector = React.createClass({
 			requiredDistancePerDay: 0,
 			distancePerDayDifference: 0,
 			requiredElevationPerDay: 0,
-			elevationPerDayDifference: 0
+			elevationPerDayDifference: 0,
+			isMetric: this.props.isMetric
 		};
 	},
 	
@@ -38,18 +39,22 @@ var MileageProjector = React.createClass({
 	componentDidUpdate: function(prevProps, prevState) {
 		
 		// Update the input fields as the units change
-		if (this.props.isMetric && !prevProps.isMetric) {
-			this.refs.annualGoalDistance.getDOMNode().value = Math.floor(this.refs.annualGoalDistance.getDOMNode().value * 1.609344);
-		} else if (!this.props.isMetric && prevProps.isMetric) {
-			this.refs.annualGoalDistance.getDOMNode().value = Math.floor(this.refs.annualGoalDistance.getDOMNode().value * 0.6213711922);
+		if (this.refs.annualGoalDistance.getDOMNode().value !== "") {
+			if (this.props.isMetric && !prevProps.isMetric) {
+				this.refs.annualGoalDistance.getDOMNode().value = Math.floor(this.refs.annualGoalDistance.getDOMNode().value * 1.609344);
+			} else if (!this.props.isMetric && prevProps.isMetric) {
+				this.refs.annualGoalDistance.getDOMNode().value = Math.floor(this.refs.annualGoalDistance.getDOMNode().value * 0.6213711922);
+			}
 		}
 		
-		if (this.props.isMetric && !prevProps.isMetric) {
-			this.refs.annualGoalElevation.getDOMNode().value = Math.floor(this.refs.annualGoalElevation.getDOMNode().value * 0.3048);
-		} else if (!this.props.isMetric && prevProps.isMetric) {
-			this.refs.annualGoalElevation.getDOMNode().value = Math.floor(this.refs.annualGoalElevation.getDOMNode().value * 3.280839895);
+		if (this.refs.annualGoalElevation.getDOMNode().value !== "") {
+			if (this.props.isMetric && !prevProps.isMetric) {
+				this.refs.annualGoalElevation.getDOMNode().value = Math.floor(this.refs.annualGoalElevation.getDOMNode().value * 0.3048);
+			} else if (!this.props.isMetric && prevProps.isMetric) {
+				this.refs.annualGoalElevation.getDOMNode().value = Math.floor(this.refs.annualGoalElevation.getDOMNode().value * 3.280839895);
+			}
 		}
-		
+
 	},
 	
 	render: function() {

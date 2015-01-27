@@ -3,6 +3,8 @@ function formatNumber(meters, format, scale, isMetric) {
 	
 	var factor, distance;
 	
+	console.log("formatNumber isMetric", isMetric);
+	
 	// Switch based on scale and system
 	if (scale === 'big') {
 		units = (isMetric) ? 'km' : 'mi';

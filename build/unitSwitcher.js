@@ -1,18 +1,18 @@
 var UnitSwitcher = React.createClass({displayName: "UnitSwitcher",
 	
-	componentDidMount: function() {
-		this.setState({isMetric: isMetric});
+	getInitialState: function() {
+		return { isMetric: this.props.isMetric };
 	},
 	
-	handleChange: function(e) {
-		this.props.handleChange(e);
+	handleSystemChange: function(e) {
+		this.props.handleSystemChange(e);
 	},
 	
 	render: function() {
 		return (
 			React.createElement("ul", {class: "unit-switcher"}, 
-				React.createElement("li", null, React.createElement("button", {onClick: this.handleChange.bind(null, true)}, "metric")), 
-				React.createElement("li", null, React.createElement("button", {onClick: this.handleChange.bind(null, false)}, "imperial"))
+				React.createElement("li", null, React.createElement("button", {onClick: this.handleSystemChange.bind(null, true)}, "metric")), 
+				React.createElement("li", null, React.createElement("button", {onClick: this.handleSystemChange.bind(null, false)}, "imperial"))
 			)
 		);
 	}
