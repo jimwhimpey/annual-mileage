@@ -4,18 +4,18 @@ var MileageProjector = React.createClass({
 	
 	getInitialState: function() {
 		return {
-			requiredPerDay: 0,
-			goalDistance: 0
+			requiredDistancePerDay: 0,
+			distancePerDayDifference: 0
 		};
 	},
 	
 	handleDistanceGoal: function(e) {
 		
-		// Set target value to the right amount of meters
-		// var valueEntered = (this.props.isMetric) ?
+		var requiredDistancePerDay = (e.target.value * 1000 - this.props.rideData.ytdDistance) / this.props.rideData.daysLeftInYear;
 		
 		this.setState({
-			requiredPerDay: (e.target.value * 1000 - this.props.rideData.ytdDistance) / this.props.rideData.daysLeftInYear
+			requiredDistancePerDay: requiredDistancePerDay,
+			distancePerDayDifference: requiredDistancePerDay - this.props.rideData.ytdDistancePerDay
 		});
 		
 	},
@@ -43,10 +43,10 @@ var MileageProjector = React.createClass({
 				<p>Annual goal distance: <input type="text" onChange={this.handleDistanceGoal} class="annualGoalDistance" ref="annualGoalDistance" />{bigUnits}</p>
 
 				<ul>
-					<li>Required distance per day: <span class="requiredDistancePerDay">{formatNumber(this.state.requiredPerDay, '0,0.00', 'big', this.props.isMetric)}</span></li>
-					<li>Current distance per day difference: <span class="distancePerDayDifference"></span></li>
-					<li>Required distance per week: <span class="requiredDistancePerWeek"></span></li>
-					<li>Current distance per week difference: <span class="distancePerWeekDifference"></span></li>
+					<li>Required distance per day: <span class="requiredDistancePerDay">{formatNumber(this.state.requiredDistancePerDay, '0,0.00', 'big', this.props.isMetric)}</span></li>
+					<li>Current distance per day difference: <span class="distancePerDayDifference">{formatNumber(this.state.distancePerDayDifference, '0,0.00', 'big', this.props.isMetric)}</span></li>
+					<li>Required distance per week: <span class="requiredDistancePerWeek">{formatNumber(this.state.requiredDistancePerDay * 7, '0,0.00', 'big', this.props.isMetric)}</span></li>
+					<li>Current distance per week difference: <span class="distancePerWeekDifference">{formatNumber(this.state.distancePerDayDifference * 7, '0,0.00', 'big', this.props.isMetric)}</span></li>
 				</ul>
 
 				<p>Annual goal elevation gain: <input type="text" class="annualGoalElevation" />{smallUnits}</p>
