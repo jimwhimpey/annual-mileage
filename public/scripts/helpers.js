@@ -13,6 +13,6 @@ function formatNumber(meters, format, scale, isMetric) {
 	}
 	
 	// Format it
-	return (distance <= 0) ? "0" + units : numeral(distance).format(format) + units;
+	return numeral(distance).format(format) + units;
 	
 };
