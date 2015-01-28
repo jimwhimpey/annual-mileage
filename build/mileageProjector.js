@@ -13,8 +13,8 @@ var MileageProjector = React.createClass({
 	},
 	
 	componentDidMount: function() {
-		this.refs.annualGoalDistance.getDOMNode().value = (typeof localStorage.getItem("goalDistance") !== "undefined" && localStorage.getItem("goalDistance") !== "") ? localStorage.getItem("goalDistance") : "20,000";
-		this.refs.annualGoalElevation.getDOMNode().value = (typeof localStorage.getItem("goalElevation") !== "undefined" && localStorage.getItem("goalElevation") !== "") ? localStorage.getItem("goalElevation") : "300,000";
+		this.refs.annualGoalDistance.getDOMNode().value = (localStorage.getItem("goalDistance") && localStorage.getItem("goalDistance") !== "") ? localStorage.getItem("goalDistance") : "20,000";
+		this.refs.annualGoalElevation.getDOMNode().value = (localStorage.getItem("goalElevation") && localStorage.getItem("goalElevation") !== "") ? localStorage.getItem("goalElevation") : "300,000";
 		this.handleDistanceGoal({ target: this.refs.annualGoalDistance.getDOMNode() });
 		this.handleElevationGoal({ target: this.refs.annualGoalElevation.getDOMNode() });
 	},

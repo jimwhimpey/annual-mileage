@@ -23,13 +23,10 @@
 		
 		<script type='text/javascript'>
 		
-			// Make this data available to our client side
-			var rideData = {{{rideDataForTemplate}}};
-			
-			// When everything's good to go
-			document.addEventListener('DOMContentLoaded', function() {
-				// Ready
-			}, false);
+			{{#if rideDataForTemplate}}
+				// Make this data available to our client side
+				var rideData = {{{rideDataForTemplate}}};
+			{{/if}}
 			
 		</script>
 		

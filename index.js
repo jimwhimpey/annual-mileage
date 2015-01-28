@@ -156,8 +156,10 @@
 		}, function(tokenResponse) {
 			
 			tokenResponse.on('data', function(data) {
-				// Remember the access token on the cookie
-				res.cookie('annualMileageToken', JSON.parse(data).access_token);
+				if (JSON.parse(data).access_token) {
+					// Remember the access token on the cookie
+					res.cookie('annualMileageToken', JSON.parse(data).access_token);
+				}
 				// Redirect to the homepage
 				res.redirect('/');
 			});

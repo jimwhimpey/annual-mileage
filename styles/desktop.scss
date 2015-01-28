@@ -131,6 +131,18 @@ h1 {
 	}
 }
 
+.stravaConnect {
+	padding: $padding;
+	padding-top: 60px;
+	padding-bottom: 60px;
+	background: lighten($base, 30%);
+	p {
+		font-family: missionRegular, Helvetica, sans-serif;
+		margin: 0 0 15px 0;
+		color: rgba(0,0,0,0.6);
+	}
+}
+
 .footer {
 	padding: $padding;
 	padding-top: 60px;
