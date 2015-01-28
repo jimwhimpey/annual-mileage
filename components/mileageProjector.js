@@ -13,14 +13,14 @@ var MileageProjector = React.createClass({
 	},
 	
 	componentDidMount: function() {
-		this.refs.annualGoalDistance.getDOMNode().value = (typeof localStorage.getItem("goalDistance") !== "undefined") ? localStorage.getItem("goalDistance") : "";
-		this.refs.annualGoalElevation.getDOMNode().value = (typeof localStorage.getItem("goalElevation") !== "undefined") ? localStorage.getItem("goalElevation") : "";
+		this.refs.annualGoalDistance.getDOMNode().value = (typeof localStorage.getItem("goalDistance") !== "undefined" && localStorage.getItem("goalDistance") !== "") ? localStorage.getItem("goalDistance") : "20,000";
+		this.refs.annualGoalElevation.getDOMNode().value = (typeof localStorage.getItem("goalElevation") !== "undefined" && localStorage.getItem("goalElevation") !== "") ? localStorage.getItem("goalElevation") : "300,000";
 		this.handleDistanceGoal({ target: this.refs.annualGoalDistance.getDOMNode() });
 		this.handleElevationGoal({ target: this.refs.annualGoalElevation.getDOMNode() });
 	},
 	
 	handleDistanceGoal: function(e) {
-		var goalInMeters = (this.props.isMetric) ? e.target.value * 1000 : e.target.value * 1.609344 * 1000,
+		var goalInMeters = (this.props.isMetric) ? parseInt(e.target.value.replace(/\D/g,''), 10) * 1000 : parseInt(e.target.value.replace(/\D/g,''), 10) * 1.609344 * 1000,
 		    requiredDistancePerDay = (goalInMeters - this.props.rideData.ytdDistance) / this.props.rideData.daysLeftInYear;
 		
 		this.setState({
@@ -35,7 +35,7 @@ var MileageProjector = React.createClass({
 	
 	handleElevationGoal: function(e) {
 		
-		var goalInMeters = (this.props.isMetric) ? e.target.value : e.target.value * 0.3048,
+		var goalInMeters = (this.props.isMetric) ? parseInt(e.target.value.replace(/\D/g,''), 10) : parseInt(e.target.value.replace(/\D/g,''), 10) * 0.3048,
 		    requiredElevationPerDay = (goalInMeters - this.props.rideData.ytdElevation) / this.props.rideData.daysLeftInYear;
 		
 		this.setState({
@@ -80,27 +80,55 @@ var MileageProjector = React.createClass({
 			
 				<div className="mileage">
 			
-					<p>Annual goal distance: <input type="text" onChange={this.handleDistanceGoal} class="annualGoalDistance" ref="annualGoalDistance" />{bigUnits}</p>
+					<p>
+						Annual goal distance <input type="text" onChange={this.handleDistanceGoal} class="annualGoalDistance" ref="annualGoalDistance" placeholder="20000" /> <span className="units">{bigUnits}</span>
+					</p>
 
-					<ul>
-						<li>Required distance per day: <span class="requiredDistancePerDay">{formatNumber(this.state.requiredDistancePerDay, '0,0.00', 'big', this.props.isMetric)}</span></li>
-						<li>Current distance per day difference: <span class="distancePerDayDifference">{formatNumber(this.state.distancePerDayDifference, '0,0.00', 'big', this.props.isMetric)}</span></li>
-						<li>Required distance per week: <span class="requiredDistancePerWeek">{formatNumber(this.state.requiredDistancePerDay * 7, '0,0.00', 'big', this.props.isMetric)}</span></li>
-						<li>Current distance per week difference: <span class="distancePerWeekDifference">{formatNumber(this.state.distancePerDayDifference * 7, '0,0.00', 'big', this.props.isMetric)}</span></li>
-					</ul>
+					<table>
+						<tr>
+							<td className="data requiredDistancePerDay">{formatNumber(this.state.requiredDistancePerDay, '0,0.00', 'big', this.props.isMetric)}</td>
+							<td>Required distance per day</td>
+						</tr>
+						<tr>
+							<td className="data distancePerDayDifference">{formatNumber(this.state.distancePerDayDifference, '0,0.00', 'big', this.props.isMetric)}</td>
+							<td>Current distance per day difference</td>
+						</tr>
+						<tr>
+							<td className="data requiredDistancePerWeek">{formatNumber(this.state.requiredDistancePerDay * 7, '0,0.00', 'big', this.props.isMetric)}</td>
+							<td>Required distance per week</td>
+						</tr>
+						<tr>
+							<td className="data distancePerWeekDifference">{formatNumber(this.state.distancePerDayDifference * 7, '0,0.00', 'big', this.props.isMetric)}</td>
+							<td>Current distance per week difference</td>
+						</tr>
+					</table>
 			
 				</div>
 			
 				<div className="elevation">
 
-					<p>Annual goal elevation gain: <input type="text" onChange={this.handleElevationGoal} class="annualGoalElevation" ref="annualGoalElevation" />{smallUnits}</p>
-
-					<ul>
-						<li>Required elevation gain per day: <span class="requiredElevationPerDay">{formatNumber(this.state.requiredElevationPerDay, '0,0', 'small', this.props.isMetric)}</span></li>
-						<li>Current elevation per day difference: <span class="elevationPerDayDifference">{formatNumber(this.state.elevationPerDayDifference, '0,0', 'small', this.props.isMetric)}</span></li>
-						<li>Required elevation gain per week: <span class="requiredElevationPerWeek">{formatNumber(this.state.requiredElevationPerDay * 7, '0,0', 'small', this.props.isMetric)}</span></li>
-						<li>Current elevation per week difference: <span class="elevationPerWeekDifference">{formatNumber(this.state.elevationPerDayDifference * 7, '0,0', 'small', this.props.isMetric)}</span></li>
-					</ul>
+					<p>
+						Annual goal elevation gain <input type="text" onChange={this.handleElevationGoal} class="annualGoalElevation" ref="annualGoalElevation" placeholder="300000" /> <span className="units">{smallUnits}</span>
+					</p>
+						
+					<table>
+						<tr>
+							<td className="data requiredElevationPerDay">{formatNumber(this.state.requiredElevationPerDay, '0,0', 'small', this.props.isMetric)}</td>
+							<td>Required elevation gain per day</td>
+						</tr>
+						<tr>
+							<td className="data elevationPerDayDifference">{formatNumber(this.state.elevationPerDayDifference, '0,0', 'small', this.props.isMetric)}</td>
+							<td>Current elevation per day difference</td>
+						</tr>
+						<tr>
+							<td className="data requiredElevationPerWeek">{formatNumber(this.state.requiredElevationPerDay * 7, '0,0', 'small', this.props.isMetric)}</td>
+							<td>Required elevation gain per week</td>
+						</tr>
+						<tr>
+							<td className="data elevationPerWeekDifference">{formatNumber(this.state.elevationPerDayDifference * 7, '0,0', 'small', this.props.isMetric)}</td>
+							<td>Current elevation per week difference</td>
+						</tr>
+					</table>
 			
 				</div>
 			
