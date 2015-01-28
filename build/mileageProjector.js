@@ -78,22 +78,30 @@ var MileageProjector = React.createClass({
 			
 			React.createElement("div", {className: "mileageProjector"}, 
 			
-				React.createElement("p", null, "Annual goal distance: ", React.createElement("input", {type: "text", onChange: this.handleDistanceGoal, class: "annualGoalDistance", ref: "annualGoalDistance"}), bigUnits), 
+				React.createElement("div", {className: "mileage"}, 
+			
+					React.createElement("p", null, "Annual goal distance: ", React.createElement("input", {type: "text", onChange: this.handleDistanceGoal, class: "annualGoalDistance", ref: "annualGoalDistance"}), bigUnits), 
 
-				React.createElement("ul", null, 
-					React.createElement("li", null, "Required distance per day: ", React.createElement("span", {class: "requiredDistancePerDay"}, formatNumber(this.state.requiredDistancePerDay, '0,0.00', 'big', this.props.isMetric))), 
-					React.createElement("li", null, "Current distance per day difference: ", React.createElement("span", {class: "distancePerDayDifference"}, formatNumber(this.state.distancePerDayDifference, '0,0.00', 'big', this.props.isMetric))), 
-					React.createElement("li", null, "Required distance per week: ", React.createElement("span", {class: "requiredDistancePerWeek"}, formatNumber(this.state.requiredDistancePerDay * 7, '0,0.00', 'big', this.props.isMetric))), 
-					React.createElement("li", null, "Current distance per week difference: ", React.createElement("span", {class: "distancePerWeekDifference"}, formatNumber(this.state.distancePerDayDifference * 7, '0,0.00', 'big', this.props.isMetric)))
+					React.createElement("ul", null, 
+						React.createElement("li", null, "Required distance per day: ", React.createElement("span", {class: "requiredDistancePerDay"}, formatNumber(this.state.requiredDistancePerDay, '0,0.00', 'big', this.props.isMetric))), 
+						React.createElement("li", null, "Current distance per day difference: ", React.createElement("span", {class: "distancePerDayDifference"}, formatNumber(this.state.distancePerDayDifference, '0,0.00', 'big', this.props.isMetric))), 
+						React.createElement("li", null, "Required distance per week: ", React.createElement("span", {class: "requiredDistancePerWeek"}, formatNumber(this.state.requiredDistancePerDay * 7, '0,0.00', 'big', this.props.isMetric))), 
+						React.createElement("li", null, "Current distance per week difference: ", React.createElement("span", {class: "distancePerWeekDifference"}, formatNumber(this.state.distancePerDayDifference * 7, '0,0.00', 'big', this.props.isMetric)))
+					)
+			
 				), 
+			
+				React.createElement("div", {className: "elevation"}, 
 
-				React.createElement("p", null, "Annual goal elevation gain: ", React.createElement("input", {type: "text", onChange: this.handleElevationGoal, class: "annualGoalElevation", ref: "annualGoalElevation"}), smallUnits), 
+					React.createElement("p", null, "Annual goal elevation gain: ", React.createElement("input", {type: "text", onChange: this.handleElevationGoal, class: "annualGoalElevation", ref: "annualGoalElevation"}), smallUnits), 
 
-				React.createElement("ul", null, 
-					React.createElement("li", null, "Required elevation gain per day: ", React.createElement("span", {class: "requiredElevationPerDay"}, formatNumber(this.state.requiredElevationPerDay, '0,0', 'small', this.props.isMetric))), 
-					React.createElement("li", null, "Current elevation per day difference: ", React.createElement("span", {class: "elevationPerDayDifference"}, formatNumber(this.state.elevationPerDayDifference, '0,0', 'small', this.props.isMetric))), 
-					React.createElement("li", null, "Required elevation gain per week: ", React.createElement("span", {class: "requiredElevationPerWeek"}, formatNumber(this.state.requiredElevationPerDay * 7, '0,0', 'small', this.props.isMetric))), 
-					React.createElement("li", null, "Current elevation per week difference: ", React.createElement("span", {class: "elevationPerWeekDifference"}, formatNumber(this.state.elevationPerDayDifference * 7, '0,0', 'small', this.props.isMetric)))
+					React.createElement("ul", null, 
+						React.createElement("li", null, "Required elevation gain per day: ", React.createElement("span", {class: "requiredElevationPerDay"}, formatNumber(this.state.requiredElevationPerDay, '0,0', 'small', this.props.isMetric))), 
+						React.createElement("li", null, "Current elevation per day difference: ", React.createElement("span", {class: "elevationPerDayDifference"}, formatNumber(this.state.elevationPerDayDifference, '0,0', 'small', this.props.isMetric))), 
+						React.createElement("li", null, "Required elevation gain per week: ", React.createElement("span", {class: "requiredElevationPerWeek"}, formatNumber(this.state.requiredElevationPerDay * 7, '0,0', 'small', this.props.isMetric))), 
+						React.createElement("li", null, "Current elevation per week difference: ", React.createElement("span", {class: "elevationPerWeekDifference"}, formatNumber(this.state.elevationPerDayDifference * 7, '0,0', 'small', this.props.isMetric)))
+					)
+			
 				)
 			
 			)

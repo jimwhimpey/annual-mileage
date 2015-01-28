@@ -3,6 +3,7 @@ logs
 *.log
 .DS_Store
 .module-cache
+.sass-cache
 
 # Runtime data
 pids

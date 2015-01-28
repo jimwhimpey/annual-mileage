@@ -14,19 +14,19 @@ var MileageData = React.createClass({
 		return (
 			<div className="mileageData">
 			
-				<ul class="yearToDate">
-					<li>Year to date distance: {formatNumber(this.props.rideData.ytdDistance, '0,0.00', 'big', this.state.isMetric)}</li>
-					<li>Year to date elevation gain: {formatNumber(this.props.rideData.ytdElevation, '0,0.00', 'small', this.state.isMetric)}</li>
+				<ul className="yearToDate">
+					<li>This year's distance: {formatNumber(this.props.rideData.ytdDistance, '0,0.00', 'big', this.state.isMetric)}</li>
+					<li>This year's elevation gain: {formatNumber(this.props.rideData.ytdElevation, '0,0.00', 'small', this.state.isMetric)}</li>
 				</ul>
 			
-				<ul class="averageYearToDate">
-					<li>Average distance per day YTD: {formatNumber(this.props.rideData.ytdDistancePerDay, '0,0', 'big', this.state.isMetric)}</li>
-					<li>Average elevation gain per day YTD: {formatNumber(this.props.rideData.ytdElevationPerDay, '0,0', 'small', this.state.isMetric)}</li>
-					<li>Average distance per week YTD: {formatNumber(this.props.rideData.ytdDistancePerWeek, '0,0', 'big', this.state.isMetric)}</li>
-					<li>Average elevation gain per week YTD: {formatNumber(this.props.rideData.ytdElevationPerWeek, '0,0', 'small', this.state.isMetric)}</li>
+				<ul className="averageYearToDate">
+					<li>Average distance per day this year: {formatNumber(this.props.rideData.ytdDistancePerDay, '0,0', 'big', this.state.isMetric)}</li>
+					<li>Average elevation gain per day this year: {formatNumber(this.props.rideData.ytdElevationPerDay, '0,0', 'small', this.state.isMetric)}</li>
+					<li>Average distance per week this year: {formatNumber(this.props.rideData.ytdDistancePerWeek, '0,0', 'big', this.state.isMetric)}</li>
+					<li>Average elevation gain per week this year: {formatNumber(this.props.rideData.ytdElevationPerWeek, '0,0', 'small', this.state.isMetric)}</li>
 				</ul>
 				
-				<ul class="currentProjection">
+				<ul className="currentProjection">
 					<li>Days left in year: {this.props.rideData.daysLeftInYear}</li>
 					<li>Projected annual distance: {formatNumber(this.props.rideData.projectedAnnualDistance, '0,0', 'big', this.state.isMetric)}</li>
 					<li>Projected annual elevation: {formatNumber(this.props.rideData.projectedAnnualElevation, '0,0', 'small', this.state.isMetric)}</li>
