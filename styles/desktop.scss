@@ -59,6 +59,16 @@ h1 {
 	background: lighten($base, 34%);
 	font-family: missionThin, Helvetica, sans-serif;
 	line-height: 1.2;
+	.yearToDate, .averageYearToDate { margin-bottom: 15px; }
+	.data {
+		font-family: Menlo, Monaco, Courier, monospace;
+		font-weight: bold;
+		font-size: 13px;
+		display: inline-block;
+		width: 66px;
+		padding: 3px 7px;
+		text-align: right;
+	}
 }
 
 .mileageProjector {

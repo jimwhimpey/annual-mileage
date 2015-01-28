@@ -72,6 +72,16 @@ h1 {
   background: #b2ee9d;
   font-family: missionThin, Helvetica, sans-serif;
   line-height: 1.2; }
+  .mileageData .yearToDate, .mileageData .averageYearToDate {
+    margin-bottom: 15px; }
+  .mileageData .data {
+    font-family: Menlo, Monaco, Courier, monospace;
+    font-weight: bold;
+    font-size: 13px;
+    display: inline-block;
+    width: 66px;
+    padding: 3px 7px;
+    text-align: right; }
 
 .mileageProjector .mileage {
   padding: 20px;
