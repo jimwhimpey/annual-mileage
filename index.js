@@ -129,7 +129,9 @@
 			
 		} else {
 			// No cookie, homepage with a connect to Strava link
-			pageResponse.render('home-page', {});
+			pageResponse.render('home-page', {
+				host: req.headers.host
+			});
 		}
 		
 	});
