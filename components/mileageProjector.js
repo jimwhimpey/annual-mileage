@@ -50,20 +50,23 @@ var MileageProjector = React.createClass({
 	
 	componentDidUpdate: function(prevProps, prevState) {
 		
+		var annualGoalDistance = parseInt(this.refs.annualGoalDistance.getDOMNode().value.replace(/\D/g,''), 10),
+		    annualGoalElevation = parseInt(this.refs.annualGoalElevation.getDOMNode().value.replace(/\D/g,''), 10);
+		
 		// Update the input fields as the units change
-		if (this.refs.annualGoalDistance.getDOMNode().value !== "") {
+		if (annualGoalDistance !== "") {
 			if (this.props.isMetric && !prevProps.isMetric) {
-				this.refs.annualGoalDistance.getDOMNode().value = Math.floor(this.refs.annualGoalDistance.getDOMNode().value * 1.609344);
+				this.refs.annualGoalDistance.getDOMNode().value = Math.floor(annualGoalDistance * 1.609344);
 			} else if (!this.props.isMetric && prevProps.isMetric) {
-				this.refs.annualGoalDistance.getDOMNode().value = Math.floor(this.refs.annualGoalDistance.getDOMNode().value * 0.6213711922);
+				this.refs.annualGoalDistance.getDOMNode().value = Math.floor(annualGoalDistance * 0.6213711922);
 			}
 		}
 		
-		if (this.refs.annualGoalElevation.getDOMNode().value !== "") {
+		if (annualGoalElevation !== "") {
 			if (this.props.isMetric && !prevProps.isMetric) {
-				this.refs.annualGoalElevation.getDOMNode().value = Math.floor(this.refs.annualGoalElevation.getDOMNode().value * 0.3048);
+				this.refs.annualGoalElevation.getDOMNode().value = Math.floor(annualGoalElevation * 0.3048);
 			} else if (!this.props.isMetric && prevProps.isMetric) {
-				this.refs.annualGoalElevation.getDOMNode().value = Math.floor(this.refs.annualGoalElevation.getDOMNode().value * 3.280839895);
+				this.refs.annualGoalElevation.getDOMNode().value = Math.floor(annualGoalElevation * 3.280839895);
 			}
 		}
 
